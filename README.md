@@ -11,7 +11,9 @@ Setting up the environment for Angular application:
 2. In the LoanCalculatorApp folder, run the ff commands in order:
 
 	>> npm install
+	
 	>> npm install -g @angular/cli command
+	
 	>> npm install --save-dev @angular-devkit/build-angular command
   
 Note: There is no need to serve the angular application separately since it is configured already to start using IIS at the same time with the back-end.
@@ -21,6 +23,7 @@ Setting up the database and Entity Framework migrations:
 2. Go to Tools-> Nuget Package Manager-> Package Manager Console and run the following commands:
 
 	>> Add-Migration Initial
+	
 	>> Update-Database
 
 Running the Application:
