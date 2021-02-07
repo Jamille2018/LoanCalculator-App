@@ -1,0 +1,26 @@
+label {
+  display: block;
+  font: 1rem "Fira Sans", sans-serif;
+}
+
+input,
+label {
+  margin: 0.4rem 0;
+}
+
+nav {
+  height: 50px;
+  padding: 30px 30px 30px 30px;
+  background-color: #101820FF;
+}
+
+.nav-font {
+  color: white;
+}
+
+nav a:hover {
+  border-bottom: 3px solid white;
+}
+
+
+

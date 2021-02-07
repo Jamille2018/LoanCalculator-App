@@ -1,0 +1,77 @@
+<div class="custom-container">
+<div class="form-group mt-4 mb-2 d-flex justify-content-between">
+  <h1>{{actionType}} Client Details</h1>  
+</div>
+
+<form [formGroup]="form" class="form shadow p-3 mt-4 mb-5 bg-white rounded" (ngSubmit)="save()" #formDir="ngForm" novalidate>
+<!-- ClientName -->
+  <div class="form-group col">
+    <label class="control-label col-md-12 font-weight-bold">Client Name</label>
+    <div class="col-md-8">
+      <input class="form-control" type="text" formControlName="clientName" required>
+    </div>
+    <div class="text-danger ml-3 font-italic" *ngIf="clientNameForm.invalid && (clientNameForm.dirty || clientNameForm.touched)">
+      <div *ngIf="clientNameForm.errors.required">
+        Client Name is required
+      </div>
+    </div>
+  </div>
+
+  <!-- Loan Amount -->
+  <div class="form-group col">
+    <label class="control-label col-md-12 font-weight-bold">Loan Amount</label>
+    <div class="col-md-6">
+      <input class="form-control" type="text" formControlName="loanAmount" [readonly]="this.isEdit">
+    </div>
+    <div class="text-danger ml-3 font-italic" *ngIf="loanAmountForm.invalid && loanAmountForm.touched">
+      <div *ngIf="loanAmountForm.errors.required">
+        Loan Amount is required
+      </div>
+    </div>
+  </div>
+
+  <!-- Loan Term -->
+  <div class="form-group col">
+    <label class="control-label col-md-12 font-weight-bold">Loan Term in years</label>
+    <div class="col-md-2">
+      <input class="form-control" type="text" formControlName="loanTerm" [readonly]="this.isEdit"> 
+    </div>
+    <div class="text-danger ml-3 font-italic" *ngIf="loanTermForm.invalid && loanTermForm.touched">
+      <div *ngIf="clientNameForm.errors.required">
+        Loan Term is required
+      </div>
+    </div>
+  </div>
+
+  <!-- Start of Loan -->
+  <div class="form-group col">
+    <label class="control-label col-md-12 font-weight-bold">Start of Loan</label>
+    <div class="col-md-4">
+      <input id="startOfLoan" name ="startOfLoan" type="date" bsDatePicker class="form-control" formControlName="startOfLoan" [readonly]="this.isEdit">
+    </div>
+    <div class="text-danger ml-3 font-italic" *ngIf="startOfLoanForm.invalid && startOfLoanForm.touched">
+      <div *ngIf="startOfLoanForm.errors.required">
+        Start of Loan is required
+      </div>
+    </div>
+  </div>
+
+  <!-- Fixed Rate -->
+  <div class="form-group col">
+    <label class="control-label col-md-12 font-weight-bold">Fixed Rate in %</label>
+    <div class="col-md-2">
+      <input class="form-control" type="text" formControlName="fixedRate">
+    </div>
+    <div class="text-danger ml-3 font-italic" *ngIf="fixedRateForm.invalid && fixedRateForm.touched">
+      <div *ngIf="fixedRateForm.errors.required">
+        Fixed Rate is required
+      </div>
+    </div>
+  </div>
+  <div class="form-group p-2 mt-4 mb-5">
+      <button type="submit" class="btn btn-success float-right mr-2 mb-2 px-3" *ngIf="!this.isEdit">Save</button>
+      <button type="submit" *ngIf="this.isEdit" class="btn btn-success float-right px-3 mr-2 mb-2" [disabled]="!clientNameForm.dirty && !fixedRateForm.dirty">Save Changes</button>
+      <button class="btn btn-outline-dark float-right mr-3 mb-2" (click)="cancel()">Cancel</button>
+  </div>
+</form>
+</div>

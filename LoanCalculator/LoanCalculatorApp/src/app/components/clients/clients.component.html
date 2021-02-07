@@ -1,0 +1,71 @@
+<link
+  rel="stylesheet"
+  href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+  integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+  crossorigin="anonymous"
+/>
+
+<p *ngIf="!(clients$ | async)"><em>Loading...</em></p>
+<div *ngIf="!isLoading">
+<!-- Title Header -->
+<h1 class="mt-5">Client Directory</h1>
+
+<!-- Search box and New Client Button-->
+<div class="d-flex justify-content-between my-4">
+  <div class="input-group col-md-4">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search by Client Name"
+      id="searchInput"
+      (keyup) = "this.search()"
+    />
+    <div class="input-group-append">
+      <button
+      class="btn btn-outline-secondary"
+      type="button"
+      (click)="this.search()"
+      >
+      <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+  <div class="mr-2 col-md-4">
+   <p><a [routerLink]="['/add']" class="btn btn-primary float-right"><i class="fa fa-plus-circle mr-2"></i>New client</a></p>
+  </div>
+</div>
+
+<table id="clientTable" class="table table-sm table-hover shadow p-3 mb-5 bg-white rounded" *ngIf="(clients$ | async)?.length>0">
+  <thead>
+    <tr>
+      <th>Client Name</th>
+      <th>Loan Amount</th>
+      <th>Loan Term (Years)</th>
+      <th>Start of Loan</th>
+      <th>Fixed Rate (%)</th>
+      <th>Manage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of (clients$ | async)">
+      <td class="p-3"><a [routerLink]="['/client/', client.clientId]">{{ client.clientName }}</a></td>
+      <td class="p-3">{{ client.loanAmount | number: '1.2-2'}}</td>
+      <td class="p-3">{{ client.loanTerm }}</td>
+      <td class="p-3">{{ client.startOfLoan| date: 'longDate' }}</td>
+      <td class="p-3">{{ client.fixedRate }}</td>
+      <td class="p-3">
+        <a
+          [routerLink]="['/client/edit/', client.clientId]" 
+          class="btn btn-sm btn-warning"
+          role="button"
+        >
+          <i class="far fa-edit"></i>
+        </a>
+      </td>
+
+      <!-- <td></td><a [routerLink]="['/client/edit/', client.clientId]" class="btn btn-primary btn-sm float-right">Edit</a></td> -->
+      <!-- <td><a [routerLink]="" (click)="delete(client.clientId)" class="btn btn-danger btn-sm float-right">Delete</a></td> -->
+    </tr>
+  </tbody>
+</table>
+</div>
